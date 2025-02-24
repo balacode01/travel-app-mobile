@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import '../../core/providers/auth_provider.dart';
 
 class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<AuthProvider>();
