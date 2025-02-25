@@ -1,76 +1,83 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_app_mobile/widgets/custom_button.dart';
+import 'package:travel_app_mobile/widgets/custom_profile_picture.dart';
+import 'package:travel_app_mobile/widgets/custom_textfield.dart';
 import '../../core/providers/auth_provider.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final provider = context.watch<AuthProvider>();
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
 
+class _SignUpScreenState extends State<SignUpScreen> {
+  late AuthProvider provider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    provider = Provider.of<AuthProvider>(
+      context,
+      listen: false,
+    ); // ✅ Get provider instance
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Sign Up")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            GestureDetector(
-              onTap: () => _chooseProfilePicture(context),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.grey[300],
-                backgroundImage:
-                    provider.profileImage != null
-                        ? FileImage(provider.profileImage!)
-                        : null,
-                child:
-                    provider.profileImage == null
-                        ? const Icon(
-                          Icons.camera_alt,
-                          size: 40,
-                          color: Colors.white,
-                        )
-                        : null,
-              ),
-            ),
-            TextField(
-              controller: provider.nameController,
-              decoration: const InputDecoration(labelText: "Name"),
-            ),
-            TextField(
+            ProfilePicture(),
+            CustomTextField(controller: provider.nameController, label: 'Name'),
+            CustomTextField(
               controller: provider.emailController,
-              decoration: const InputDecoration(labelText: "Email"),
+              label: 'Email',
             ),
-            TextField(
+            CustomTextField(
               controller: provider.phoneController,
-              decoration: const InputDecoration(labelText: "Phone Number"),
+              label: "Phone number",
             ),
-            TextField(
+            CustomTextField(
               controller: provider.bioController,
-              decoration: const InputDecoration(labelText: "Bio"),
+              label: "Bio",
+              maxLines: 3,
             ),
-            TextField(
+            CustomTextField(
               controller: provider.instagramController,
-              decoration: const InputDecoration(labelText: "Instagram URL"),
+              label: "Instagram Link",
             ),
-            TextField(
+            CustomTextField(
               controller: provider.youtubeController,
-              decoration: const InputDecoration(labelText: "YouTube URL"),
+              label: "Youtube Link",
             ),
             const SizedBox(height: 20),
-            provider.isLoading
-                ? const CircularProgressIndicator()
-                : ElevatedButton(
-                  onPressed: () => provider.registerUser(),
-                  child: const Text("Register"),
-                ),
-            if (provider.errorMessage != null)
-              Text(
-                "Error: ${provider.errorMessage}",
-                style: const TextStyle(color: Colors.red),
-              ),
+            Consumer<AuthProvider>(
+              builder: (context, provider, child) {
+                return provider.isLoading
+                    ? const CircularProgressIndicator()
+                    : CustomAnimatedButton(
+                      text: "Continue",
+                      isLoading: provider.isLoading,
+                      onPressed: () {
+                        if (provider.validateForm()) {
+                          provider.registerUser();
+                        }
+                      },
+                    );
+              },
+            ),
+            provider.errorMessage != null
+                ? Text(
+                  "Error: ${provider.errorMessage}",
+                  style: const TextStyle(color: Colors.red),
+                )
+                : SizedBox(),
             if (provider.user != null)
               Text(
                 "User Registered: ${provider.user!.name}",
@@ -82,9 +89,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void _chooseProfilePicture(BuildContext context) {
-    final provider = context.read<AuthProvider>();
-
+  void _chooseProfilePicture() {
     showModalBottomSheet(
       context: context,
       builder: (_) {

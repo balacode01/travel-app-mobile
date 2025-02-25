@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:travel_app_mobile/core/providers/main_providers.dart';
+import 'package:travel_app_mobile/core/providers/auth_provider.dart';
 import 'package:travel_app_mobile/routes/routes.dart';
 import 'package:travel_app_mobile/screens/auth/register.dart';
 
 void main() {
-  runApp(MultiProvider(providers: appProviders, child: const MyApp()));
+  runApp(
+    MultiProvider(
+      //providers: appProviders,
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

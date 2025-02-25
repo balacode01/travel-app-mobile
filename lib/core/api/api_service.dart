@@ -17,9 +17,12 @@ class ApiService {
     );
 
     if (response.statusCode == 201) {
+      print(response.statusCode);
       final Map<String, dynamic> responseData = jsonDecode(response.body);
       return UserModel.fromJson(responseData["user"]);
     } else {
+      print(response.statusCode);
+      print(response);
       throw Exception("Failed to register user");
     }
   }

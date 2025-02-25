@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:travel_app_mobile/widgets/custom_validations.dart';
 import '../api/api_service.dart';
 import '../models/response_model/user_model.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,9 +17,9 @@ class AuthProvider with ChangeNotifier {
   UserModel? get user => _user;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-
   File? _profileImage;
-
+  String? _profileImageBase64;
+  String? get profileImageBase64 => _profileImageBase64;
   File? get profileImage => _profileImage;
 
   final TextEditingController nameController = TextEditingController();
@@ -28,7 +30,24 @@ class AuthProvider with ChangeNotifier {
   final TextEditingController instagramController = TextEditingController();
   final TextEditingController youtubeController = TextEditingController();
 
+  bool validateForm() {
+    final nameError = CustomValidations.validateName(nameController.text);
+    final emailError = CustomValidations.validateEmail(emailController.text);
+    final phoneError = CustomValidations.validatePhone(phoneController.text);
+    final bioError = CustomValidations.validateBio(bioController.text);
+    if (nameError != null ||
+        emailError != null ||
+        phoneError != null ||
+        bioError != null) {
+      _errorMessage = nameError ?? emailError ?? phoneError ?? bioError;
+      notifyListeners();
+      return false;
+    }
+    return true;
+  }
+
   Future<void> registerUser() async {
+    if (!validateForm()) return;
     _isLoading = true;
     _errorMessage = null;
     notifyListeners();
@@ -37,7 +56,7 @@ class AuthProvider with ChangeNotifier {
       "name": nameController.text,
       "email_address": emailController.text,
       "phone_number": phoneController.text,
-      "profile_picture": profileController.text,
+      "profile_picture": _profileImageBase64,
       "bio": bioController.text,
       "social_links": {
         "instagram": instagramController.text,
@@ -46,6 +65,9 @@ class AuthProvider with ChangeNotifier {
     };
     try {
       _user = await _apiService.registerUser(requestBody);
+      if (_user != null) {
+        clearFields();
+      }
     } catch (e) {
       _errorMessage = e.toString();
     } finally {
@@ -64,29 +86,14 @@ class AuthProvider with ChangeNotifier {
     youtubeController.clear();
   }
 
+  final picker = ImagePicker();
+  final pickedFile = XFile;
   Future<void> pickImage(ImageSource source) async {
-    final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source);
-
     if (pickedFile != null) {
       _profileImage = File(pickedFile.path);
+      _profileImageBase64 = base64Encode(await _profileImage!.readAsBytes());
       notifyListeners();
     }
   }
-
-  /// Upload profile picture (Replace this with actual API upload)
-  Future<void> uploadProfilePicture() async {
-    if (_profileImage == null) return;
-
-    _isLoading = true;
-    notifyListeners();
-
-    // Simulate API call delay
-    await Future.delayed(const Duration(seconds: 2));
-
-    _isLoading = false;
-    notifyListeners();
-  }
-
-  /// generate otp code
 }
