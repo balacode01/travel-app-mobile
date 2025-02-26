@@ -3,6 +3,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/widgets/custom_button.dart';
 import 'package:travel_app_mobile/widgets/custom_profile_picture.dart';
+import 'package:travel_app_mobile/widgets/custom_snackbar.dart';
 import 'package:travel_app_mobile/widgets/custom_textfield.dart';
 import '../../core/providers/auth_provider.dart';
 
@@ -57,6 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               label: "Youtube Link",
             ),
             const SizedBox(height: 20),
+
             Consumer<AuthProvider>(
               builder: (context, provider, child) {
                 return provider.isLoading
@@ -67,6 +69,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onPressed: () {
                         if (provider.validateForm()) {
                           provider.registerUser();
+                        } else {
+                          CustomSnackBar();
                         }
                       },
                     );
