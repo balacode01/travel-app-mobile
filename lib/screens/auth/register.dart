@@ -67,26 +67,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: "Continue",
                       isLoading: provider.isLoading,
                       onPressed: () {
+                        //provider.printData();
                         if (provider.validateForm()) {
                           provider.registerUser();
                         } else {
-                          CustomSnackBar();
+                          CustomSnackbar.show(
+                            context,
+                            message: 'Missings Fields',
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                          );
                         }
                       },
                     );
               },
             ),
-            provider.errorMessage != null
-                ? Text(
-                  "Error: ${provider.errorMessage}",
-                  style: const TextStyle(color: Colors.red),
-                )
-                : SizedBox(),
-            if (provider.user != null)
-              Text(
-                "User Registered: ${provider.user!.name}",
-                style: const TextStyle(color: Colors.green),
-              ),
+            // provider.errorMessage != null
+            //     ? Text(
+            //       "Error: ${provider.errorMessage}",
+            //       style: const TextStyle(color: Colors.red),
+            //     )
+            //     : SizedBox(),
+            // if (provider.user != null)
+            //   Text(
+            //     "User Registered: ${provider.user!.name}",
+            //     style: const TextStyle(color: Colors.green),
+            //   ),
           ],
         ),
       ),

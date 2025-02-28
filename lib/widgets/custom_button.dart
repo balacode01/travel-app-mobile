@@ -53,7 +53,7 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton> {
         curve: Curves.easeInOut,
         decoration: BoxDecoration(
           color: widget.isLoading ? Colors.grey[400] : widget.color,
-          borderRadius: BorderRadius.circular(30), // Oval shape
+          borderRadius: BorderRadius.circular(15), // Oval shape
         ),
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         alignment: Alignment.center,

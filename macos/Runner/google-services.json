@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58897440355",
+    "project_id": "fam-chat-ccb49",
+    "storage_bucket": "fam-chat-ccb49.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58897440355:android:5111256cf297e43e2fa256",
+        "android_client_info": {
+          "package_name": "com.example.travel_app_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP42fgcugKwz5RauIGUusOJXWz8Y0FUGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
