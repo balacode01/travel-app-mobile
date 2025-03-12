@@ -34,7 +34,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ProfilePicture(),
+            //ProfilePicture(),
             CustomTextField(controller: provider.nameController, label: 'Name'),
             CustomTextField(
               controller: provider.emailController,

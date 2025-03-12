@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:travel_app_mobile/widgets/custom_snackbar.dart';
 import 'package:travel_app_mobile/widgets/custom_validations.dart';
 import '../api/api_service.dart';
 import '../models/response_model/user_model.dart';
@@ -30,6 +29,12 @@ class AuthProvider with ChangeNotifier {
   final TextEditingController bioController = TextEditingController();
   final TextEditingController instagramController = TextEditingController();
   final TextEditingController youtubeController = TextEditingController();
+
+  /// login provider
+  final TextEditingController phoneNumberController = TextEditingController();
+
+  // otp provider
+  final TextEditingController otpController = TextEditingController();
 
   printData() {
     print(nameController.text);
