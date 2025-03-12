@@ -1,31 +1,15 @@
-class GenerateOtp {
-  final String message;
-  final String phoneNumber;
-  final String otp;
-  final String expiresIn;
+class UserPhoneNumber {
+  final String? phoneNumber;
 
-  GenerateOtp({
-    required this.message,
-    required this.phoneNumber,
-    required this.otp,
-    required this.expiresIn,
-  });
+  UserPhoneNumber({required this.phoneNumber});
 
-  factory GenerateOtp.fromJson(Map<String, dynamic> json) {
-    return GenerateOtp(
-      message: json['message'],
-      phoneNumber: json['phoneNumber'],
-      otp: json['otp'],
-      expiresIn: json['expiresIn'],
-    );
+  /// Convert JSON to Model
+  factory UserPhoneNumber.fromJson(Map<String, dynamic> json) {
+    return UserPhoneNumber(phoneNumber: json['phone_number']);
   }
 
+  /// Convert Model to JSON
   Map<String, dynamic> toJson() {
-    return {
-      "message": message,
-      "phoneNumber": phoneNumber,
-      "otp": otp,
-      "expiresIn": expiresIn,
-    };
+    return {'phone_number': phoneNumber};
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_app_mobile/screens/auth/login.dart';
 import 'package:travel_app_mobile/widgets/custom_button.dart';
 import 'package:travel_app_mobile/widgets/custom_profile_picture.dart';
 import 'package:travel_app_mobile/widgets/custom_snackbar.dart';
@@ -81,6 +82,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     );
               },
+            ),
+
+            const SizedBox(height: 16),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => LoginPage()));
+              },
+              child: Text(
+                "Have an account?. Login here",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
             ),
             // provider.errorMessage != null
             //     ? Text(

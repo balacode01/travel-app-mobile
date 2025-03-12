@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/core/providers/auth_provider.dart';
+import 'package:travel_app_mobile/screens/auth/verify_otp.dart';
 import 'package:travel_app_mobile/widgets/custom_button.dart';
 import 'package:travel_app_mobile/widgets/custom_textfield.dart';
 
@@ -33,11 +34,19 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTextField(
-                controller: provider.phoneNumberController,
+                controller: provider.otpController,
                 label: "Phone number",
               ),
               const SizedBox(height: 16),
-              CustomAnimatedButton(text: 'Phone Number', onPressed: () {}),
+              CustomAnimatedButton(
+                text: 'Submit',
+                onPressed: () async {
+                  // Navigator.of(
+                  //   context,
+                  // ).push(MaterialPageRoute(builder: (_) => VerifyOtpPage()));
+                  provider.generateOtpLogin(context);
+                },
+              ),
             ],
           ),
         ),

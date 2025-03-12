@@ -33,9 +33,11 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
               const SizedBox(height: 20),
               Pinput(
                 controller: provider.otpController,
-                enabled: true,
+
                 keyboardType: TextInputType.number,
                 length: 6,
+                isCursorAnimationEnabled: true,
+                showCursor: true,
                 defaultPinTheme: PinTheme(
                   width: 56,
                   height: 56,
@@ -51,7 +53,12 @@ class _VerifyOtpPageState extends State<VerifyOtpPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              CustomAnimatedButton(text: 'Verify OTP', onPressed: () {}),
+              CustomAnimatedButton(
+                text: 'Verify OTP',
+                onPressed: () {
+                  provider.verifyOtpLogin(context);
+                },
+              ),
             ],
           ),
         ),
