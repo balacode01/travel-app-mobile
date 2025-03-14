@@ -15,22 +15,30 @@ String VerifyOtpLoginModelToJson(VerifyOtpLoginModel data) =>
     json.encode(data.toJson());
 
 class VerifyOtpLoginModel extends BaseStatus {
-  VerifyOtpLoginModel({this.message, this.phoneNumber, this.token});
+  VerifyOtpLoginModel({
+    this.message,
+    this.phoneNumber,
+    this.token,
+    this.statusCode,
+  });
   String? message;
   String? phoneNumber;
   String? token;
+  int? statusCode;
 
   factory VerifyOtpLoginModel.fromJson(Map<String, dynamic> json) =>
       VerifyOtpLoginModel(
         message: json["message"],
         phoneNumber: json["phone_number"],
         token: json["token"],
+        statusCode: json["statusCode"],
       );
 
   Map<String, dynamic> toJson() => {
     "message": message,
     "phone_number": phoneNumber,
     "token": token,
+    "statusCode": statusCode,
   };
 }
 

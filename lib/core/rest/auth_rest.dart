@@ -54,6 +54,7 @@ class AuthRest {
         );
       } else {}
     } catch (e) {
+      print(e);
     } finally {}
     return verifyOtpLoginModel;
   }

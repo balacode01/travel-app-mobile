@@ -4,11 +4,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:travel_app_mobile/core/models/response_model/generate_otp_model.dart';
 import 'package:travel_app_mobile/core/models/response_model/otp_model.dart';
 import 'package:travel_app_mobile/core/models/response_model/verify_otp_model.dart';
 import 'package:travel_app_mobile/core/rest/auth_rest.dart';
 import 'package:travel_app_mobile/screens/auth/verify_otp.dart';
+import 'package:travel_app_mobile/screens/home/home_page.dart';
 import 'package:travel_app_mobile/widgets/custom_validations.dart';
 import '../api/api_service.dart';
 import '../models/response_model/user_model.dart';
@@ -112,15 +112,16 @@ class AuthProvider with ChangeNotifier {
   }
 
   /// login app
-  Future<void> generateOtpLogin(BuildContext context) async {
+  Future<void> submitPhoneNumber(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
-    final String phoneNumber = otpController.text;
+    final String phoneNumber = phoneNumberController.text.trim();
     try {
       _userPhoneNumber = await _authRest.loginWithOtp(phoneNumber);
       if (_userPhoneNumber!.otp!.isNotEmpty) {
         print("Logged in successfully");
         print(_userPhoneNumber!.otp);
+        print("Logged in successfully");
         Navigator.of(
           context,
         ).push(MaterialPageRoute(builder: (_) => VerifyOtpPage()));
@@ -134,19 +135,26 @@ class AuthProvider with ChangeNotifier {
   }
 
   /// Verify Otp
-  Future<void> verifyOtpLogin(BuildContext context) async {
+  Future<String?> verifyOtpLogin(BuildContext context) async {
     _isLoading = true;
     notifyListeners();
     try {
       _verifyOtpLoginModel = await _authRest.verifyOtpLogin(
-        phoneController.text,
-        otpController.text,
+        phoneNumberController.text.trim(),
+        otpController.text.trim(),
       );
-      if (_verifyOtpLoginModel!.phoneNumber!.isNotEmpty) {
-        // navigate
-        print("HomePage");
+      if (_verifyOtpLoginModel!.statusCode == 201) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false, // Remove all previous routes
+        );
+        return null;
+      } else {
+        return "Invalid OTP. Try again";
       }
     } catch (e) {
+      return "Something went wrong. Please try again";
     } finally {
       _isLoading = false;
       notifyListeners();
