@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/core/providers/auth_provider.dart';
 import 'package:travel_app_mobile/routes/routes.dart';
 import 'package:travel_app_mobile/screens/auth/login.dart';
+import 'package:travel_app_mobile/screens/home/home_page.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Travel App",
-      initialRoute: Routes.signUp,
+      initialRoute: Routes.homePage,
       routes: appRoutes,
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
