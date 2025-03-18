@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/core/providers/auth_provider.dart';
 import 'package:travel_app_mobile/core/utils/validations.dart';
-import 'package:travel_app_mobile/screens/auth/verify_otp.dart';
 import 'package:travel_app_mobile/widgets/custom_button.dart';
 import 'package:travel_app_mobile/widgets/custom_snackbar.dart';
 import 'package:travel_app_mobile/widgets/custom_textfield.dart';
@@ -18,15 +17,11 @@ class _LoginPageState extends State<LoginPage> {
   late AuthProvider provider;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _isFormValid = false;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    provider = Provider.of<AuthProvider>(
-      context,
-      listen: false,
-    ); // Get provider instance
+    provider = Provider.of<AuthProvider>(context, listen: false);
   }
 
   @override
@@ -50,21 +45,14 @@ class _LoginPageState extends State<LoginPage> {
                 CustomAnimatedButton(
                   text: 'Submit',
                   onPressed: () async {
-                    // if (provider.phoneNumberController.text.isNotEmpty) {
-                    //   provider.submitPhoneNumber(context);
-                    // } else {
-                    //   print("======Hey");
-                    //   CustomSnackbar.show(context, message: "Invalid data");
-                    // }
                     if (_formKey.currentState!.validate()) {
                       provider.submitPhoneNumber(context);
+                    } else {
+                      CustomSnackbar.show(
+                        context,
+                        message: "Invalid details. Try again!",
+                      );
                     }
-                    // else {
-                    //   CustomSnackbar.show(
-                    //     context,
-                    //     message: "Invalid details. Try again!",
-                    //   );
-                    // }
                   },
                 ),
               ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app_mobile/screens/discover/discover_screen.dart';
 import 'package:travel_app_mobile/screens/feed/feed_screen.dart';
-import 'package:travel_app_mobile/screens/profile_settings.dart';
+import 'package:travel_app_mobile/screens/profile/profile_settings.dart';
 import 'package:travel_app_mobile/widgets/custom_bottomNavigationBar.dart';
 
 class HomePage extends StatefulWidget {
