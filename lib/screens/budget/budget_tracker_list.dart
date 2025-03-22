@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class BudgetTracker extends StatefulWidget {
-  const BudgetTracker({super.key});
+class BudgetTrackerScreen extends StatefulWidget {
+  const BudgetTrackerScreen({super.key});
 
   @override
-  State<BudgetTracker> createState() => _BudgetTrackerState();
+  State<BudgetTrackerScreen> createState() => _BudgetTrackerState();
 }
 
-class _BudgetTrackerState extends State<BudgetTracker> {
+class _BudgetTrackerState extends State<BudgetTrackerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: Center(child: Text("Budget list")));
