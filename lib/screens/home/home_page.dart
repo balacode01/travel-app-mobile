@@ -31,10 +31,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: CustomBottomNavBar(
-      //   currentIndex: _selectedIndex,
-      //   onTap: _onItemTapped,
-      // ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Colors.red,

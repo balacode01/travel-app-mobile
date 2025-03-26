@@ -5,6 +5,7 @@ import 'package:travel_app_mobile/core/api/services.dart';
 import 'package:travel_app_mobile/core/models/response_model/otp_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:travel_app_mobile/core/models/response_model/verify_otp_model.dart';
+import 'package:travel_app_mobile/core/utils/token_storage.dart';
 import 'package:travel_app_mobile/core/utils/utils.dart';
 
 class AuthRest {
@@ -20,6 +21,9 @@ class AuthRest {
       );
 
       if (response.statusCode == 201) {
+        print("=====+++++=====");
+        print(response.body);
+        //await TokenStorage.saveToken(response.body]);
         generateOtpResponse = GenerateOtpResponse.fromJson(
           jsonDecode(response.body),
         );
@@ -49,9 +53,13 @@ class AuthRest {
         body: jsonEncode(dataBody),
       );
       if (response.statusCode == 201) {
+        print("=====+++++=====");
+        print(response.body);
         verifyOtpLoginModel = VerifyOtpLoginModel.fromJson(
           jsonDecode(response.body),
         );
+        await TokenStorage.saveToken(verifyOtpLoginModel.token!);
+        String? token = await TokenStorage.getToken();
       } else {}
     } catch (e) {
       print(e);
