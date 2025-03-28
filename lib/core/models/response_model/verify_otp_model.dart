@@ -1,49 +1,44 @@
 // To parse this JSON data, do
 //
-//     final verifyOtpLogin = verifyOtpLoginFromJson(jsonString);
-
-// ignore_for_file: non_constant_identifier_names
+//     final verifyOtpLoginModel = verifyOtpLoginModelFromJson(jsonString);
 
 import 'dart:convert';
 
-import 'package:travel_app_mobile/core/models/response_model/otp_model.dart';
-
-VerifyOtpLoginModel VerifyOtpLoginModelFromJson(String str) =>
+VerifyOtpLoginModel verifyOtpLoginModelFromJson(String str) =>
     VerifyOtpLoginModel.fromJson(json.decode(str));
 
-String VerifyOtpLoginModelToJson(VerifyOtpLoginModel data) =>
+String verifyOtpLoginModelToJson(VerifyOtpLoginModel data) =>
     json.encode(data.toJson());
 
-class VerifyOtpLoginModel extends BaseStatus {
-  VerifyOtpLoginModel({
-    this.message,
-    this.phoneNumber,
-    this.token,
-    this.statusCode,
-  });
+class VerifyOtpLoginModel {
+  String? userId;
+  int? statusCode;
   String? message;
   String? phoneNumber;
   String? token;
-  int? statusCode;
+
+  VerifyOtpLoginModel({
+    this.userId,
+    this.statusCode,
+    this.message,
+    this.phoneNumber,
+    this.token,
+  });
 
   factory VerifyOtpLoginModel.fromJson(Map<String, dynamic> json) =>
       VerifyOtpLoginModel(
+        userId: json["userId"],
+        statusCode: json["statusCode"],
         message: json["message"],
         phoneNumber: json["phone_number"],
         token: json["token"],
-        statusCode: json["statusCode"],
       );
 
   Map<String, dynamic> toJson() => {
+    "userId": userId,
+    "statusCode": statusCode,
     "message": message,
     "phone_number": phoneNumber,
     "token": token,
-    "statusCode": statusCode,
   };
-}
-
-class BaseStatus {
-  int? statusCode;
-
-  BaseStatus({this.statusCode});
 }

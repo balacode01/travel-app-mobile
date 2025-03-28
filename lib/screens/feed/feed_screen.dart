@@ -61,11 +61,16 @@ class _FeedScreenState extends State<FeedScreen> {
               itemBuilder: (context, index) {
                 final feed = feedProvider.feeds.data![index];
 
-                return FeedCard(
-                  imageUrl: feed.coverImage,
-                  title: feed.name,
-                  location: feed.location,
-                  price: feed.totalBudget,
+                return GestureDetector(
+                  onTap: () {
+                    feedProvider.fetchTripDetailsOfUser();
+                  },
+                  child: FeedCard(
+                    imageUrl: feed.coverImage,
+                    title: feed.name,
+                    location: feed.location,
+                    price: feed.totalBudget,
+                  ),
                 );
               },
             ),

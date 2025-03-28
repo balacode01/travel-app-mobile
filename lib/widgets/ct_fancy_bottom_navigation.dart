@@ -20,7 +20,7 @@ class CustomBottomNav extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(
-              Icons.home_filled,
+              Icons.home,
               color: selectedIndex == 0 ? Colors.red : Colors.grey,
             ),
             onPressed: () => onItemTapped(0),

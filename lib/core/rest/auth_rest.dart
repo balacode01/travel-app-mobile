@@ -6,7 +6,7 @@ import 'package:travel_app_mobile/core/models/response_model/otp_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:travel_app_mobile/core/models/response_model/verify_otp_model.dart';
 import 'package:travel_app_mobile/core/utils/token_storage.dart';
-import 'package:travel_app_mobile/core/utils/utils.dart';
+import 'package:travel_app_mobile/core/utils/defaultHeaders.dart';
 
 class AuthRest {
   Future<GenerateOtpResponse> loginWithOtp(String mobileNumber) async {
@@ -48,21 +48,25 @@ class AuthRest {
     Map<String, dynamic> dataBody = {"phone_number": mobileNumber, "otp": otp};
     try {
       http.Response response = await serviceCall(
-        headers: getDefaultHeaders(6),
+        headers: {"Content-Type": "application/json"},
+        //headers: getDefaultHeaders(5),
         url: "${ApiConstants.baseUrl}${ApiConstants.verifyOtp}",
         body: jsonEncode(dataBody),
       );
       if (response.statusCode == 201) {
-        print("=====+++++=====");
-        print(response.body);
         verifyOtpLoginModel = VerifyOtpLoginModel.fromJson(
           jsonDecode(response.body),
         );
         await TokenStorage.saveToken(verifyOtpLoginModel.token!);
-        String? token = await TokenStorage.getToken();
-      } else {}
+        await TokenStorage.saveUserId(verifyOtpLoginModel.userId!);
+        print(TokenStorage.getUserId());
+        Future<String?> tokenStored = TokenStorage.getUserId();
+        print("User id ...... $tokenStored");
+      } else {
+        print("object");
+      }
     } catch (e) {
-      print(e);
+      print("Error : $e");
     } finally {}
     return verifyOtpLoginModel;
   }

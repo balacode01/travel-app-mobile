@@ -1,6 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:travel_app_mobile/core/utils/token_storage.dart';
 
-Future<Map<String, String>> getDefaultHeaders(int headerType) async {
+Future<Map<String, String>> getDefaultHeaders(int? headerType) async {
   String? token = await TokenStorage.getToken(); //  Await the token retrieval
   Map<String, String> headers;
 
@@ -26,11 +28,7 @@ Future<Map<String, String>> getDefaultHeaders(int headerType) async {
       "Accept": "application/json",
     };
   } else if (headerType == 5) {
-    headers = {
-      'Authorization': 'Bearer $token',
-      "Content-Type": "application/x-www-form-urlencoded",
-      // "JSessionID": sessionId ?? "",
-    };
+    headers = {"Content-Type": "application/json"};
   } else if (headerType == 6) {
     headers = {
       'Authorization': 'Bearer $token', // Fixed by awaiting token
@@ -42,6 +40,5 @@ Future<Map<String, String>> getDefaultHeaders(int headerType) async {
       // "JSessionID": sessionId ?? "",
     };
   }
-
   return headers;
 }
