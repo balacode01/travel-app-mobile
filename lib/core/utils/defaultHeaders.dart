@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:travel_app_mobile/core/utils/token_storage.dart';
+import 'package:travel_app_mobile/core/utils/local_storage.dart';
 
 Future<Map<String, String>> getDefaultHeaders(int? headerType) async {
   String? token = await TokenStorage.getToken(); //  Await the token retrieval

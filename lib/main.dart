@@ -3,7 +3,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/core/providers/auth_provider.dart';
 import 'package:travel_app_mobile/core/providers/feed_provider.dart';
-import 'package:travel_app_mobile/core/utils/token_storage.dart';
+import 'package:travel_app_mobile/core/providers/main_providers.dart';
+import 'package:travel_app_mobile/core/providers/trip_provider.dart';
+import 'package:travel_app_mobile/core/utils/local_storage.dart';
 import 'package:travel_app_mobile/routes/routes.dart';
 import 'package:travel_app_mobile/screens/auth/login.dart';
 import 'package:travel_app_mobile/screens/home/home_page.dart';
@@ -14,10 +16,11 @@ void main() async {
 
   runApp(
     MultiProvider(
-      //providers: appProviders,
+      // providers: appProviders,
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => FeedProvider()),
+        ChangeNotifierProvider(create: (_) => TripProvider()),
       ],
       child: const MyApp(),
     ),

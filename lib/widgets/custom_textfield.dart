@@ -8,9 +8,11 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool? readOnly;
   final String? Function(String?)? validator;
   final Function(String)? onChanged;
   final int maxLines;
+  final VoidCallback? onTap;
 
   const CustomTextField({
     Key? key,
@@ -24,6 +26,8 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.onChanged,
     this.maxLines = 1,
+    this.readOnly,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -31,6 +35,7 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        onTap: onTap,
         controller: controller,
         obscureText: obscureText,
         keyboardType: keyboardType,

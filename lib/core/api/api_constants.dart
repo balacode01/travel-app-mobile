@@ -7,8 +7,13 @@ class ApiConstants {
 
   static const String createTrip = 'trips/create';
   static const String feedTrips = 'trips/list';
-  static String getAllTrips(String id) => 'trips/$id';
-  static String deleteTrips(String id) => 'trips/$id';
-  static String updateTrip(String id) => 'trips/$id';
-  static String getAllTripsByUserId(String userId) => 'trips/user/$userId';
+
+  static const String getAllTripsInFeed = 'trips/:id';
+  //static String getAllTrips(String id) => 'trips/$id';
+  static const String deleteTrips = 'trips/:id';
+  //static String deleteTrips(String id) => 'trips/$id';
+  static const String updateTripByUserId = 'trips/:id';
+  //static String updateTrip(String id) => 'trips/$id';
+  static String getAllTripsByUserId = 'trips/user/'; // expects user_id
+  //static String getAllTripsByUserId(String userId) => 'trips/user/$userId';
 }

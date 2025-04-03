@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app_mobile/core/utils/token_storage.dart';
+import 'package:travel_app_mobile/core/utils/local_storage.dart';
 
 class ProfileSettingsScreen extends StatefulWidget {
   const ProfileSettingsScreen({super.key});

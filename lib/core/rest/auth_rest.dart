@@ -5,7 +5,7 @@ import 'package:travel_app_mobile/core/api/services.dart';
 import 'package:travel_app_mobile/core/models/response_model/otp_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:travel_app_mobile/core/models/response_model/verify_otp_model.dart';
-import 'package:travel_app_mobile/core/utils/token_storage.dart';
+import 'package:travel_app_mobile/core/utils/local_storage.dart';
 import 'package:travel_app_mobile/core/utils/defaultHeaders.dart';
 
 class AuthRest {

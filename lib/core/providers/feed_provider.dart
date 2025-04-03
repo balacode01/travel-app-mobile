@@ -5,7 +5,7 @@ import 'package:travel_app_mobile/core/rest/feed_rest.dart';
 
 class FeedProvider extends ChangeNotifier {
   GetFeedModelScreen _feeds = GetFeedModelScreen();
-  FetchTripDetailsByUserIdModel _fetchTripDetailsByUserIdModel =
+  FetchTripDetailsByUserIdModel _fetchTripDetailsByUserIdModelResponse =
       FetchTripDetailsByUserIdModel();
   bool _isLoading = false;
 
@@ -39,7 +39,10 @@ class FeedProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _fetchTripDetailsByUserIdModel = await feedRest.fetchTripByUserId();
+      _fetchTripDetailsByUserIdModelResponse =
+          await feedRest.fetchTripByUserId();
+      print(_fetchTripDetailsByUserIdModelResponse.trips![1].description);
     } catch (e) {}
+    notifyListeners();
   }
 }

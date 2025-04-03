@@ -3,6 +3,7 @@ import 'package:travel_app_mobile/screens/budget/budget_tracker_list.dart';
 import 'package:travel_app_mobile/screens/discover/discover_screen.dart';
 import 'package:travel_app_mobile/screens/feed/feed_screen.dart';
 import 'package:travel_app_mobile/screens/profile/profile_settings.dart';
+import 'package:travel_app_mobile/screens/trips/create_trip_screen.dart';
 import 'package:travel_app_mobile/widgets/ct_fancy_bottom_navigation.dart';
 import 'package:travel_app_mobile/widgets/custom_bottomNavigationBar.dart';
 
@@ -32,7 +33,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => CreateTripScreen()));
+        },
         backgroundColor: Colors.red,
         child: const Icon(Icons.add, color: Colors.white),
       ),
