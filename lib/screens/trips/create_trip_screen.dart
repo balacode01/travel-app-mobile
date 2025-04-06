@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app_mobile/core/providers/trip_provider.dart';
+import 'package:travel_app_mobile/screens/feed/feed_screen.dart';
+import 'package:travel_app_mobile/screens/home/home_page.dart';
 import 'package:travel_app_mobile/widgets/custom_button.dart';
 import 'package:travel_app_mobile/widgets/custom_textfield.dart';
 import 'dart:io';
@@ -121,7 +123,17 @@ class _CreateTripScreenState extends State<CreateTripScreen> {
                   const SizedBox(height: 10),
                   CustomAnimatedButton(
                     text: 'Publish Trip',
-                    onPressed: () => tripProvider.createTrip(),
+                    onPressed: () async {
+                      await tripProvider.createTrip();
+                      if (tripProvider.createTripStatus == true) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                          (Route<dynamic> route) =>
+                              false, // 👈 this removes all previous routes
+                        );
+                      }
+                    },
                   ),
                 ],
               ),

@@ -27,7 +27,7 @@ class CreateTripModelResponse {
   Map<String, dynamic> toJson() => {
     "message": message,
     "statusCode": statusCode,
-    "trip": trip!.toJson(),
+    "trip": trip?.toJson(),
   };
 }
 
@@ -78,13 +78,13 @@ class Trip {
     "name": name,
     "location": location,
     "from_date":
-        "${fromDate!.year.toString().padLeft(4, '0')}-${fromDate!.month.toString().padLeft(2, '0')}-${fromDate!.day.toString().padLeft(2, '0')}",
+        "${fromDate?.year.toString().padLeft(4, '0')}-${fromDate?.month.toString().padLeft(2, '0')}-${fromDate?.day.toString().padLeft(2, '0')}",
     "to_date":
-        "${toDate!.year.toString().padLeft(4, '0')}-${toDate!.month.toString().padLeft(2, '0')}-${toDate!.day.toString().padLeft(2, '0')}",
+        "${toDate?.year.toString().padLeft(4, '0')}-${toDate?.month.toString().padLeft(2, '0')}-${toDate?.day.toString().padLeft(2, '0')}",
     "description": description,
     "total_budget": totalBudget,
     "cover_image": coverImage,
-    "created_at": createdAt!.toIso8601String(),
-    "updated_at": updatedAt!.toIso8601String(),
+    "created_at": createdAt?.toIso8601String(),
+    "updated_at": updatedAt?.toIso8601String(),
   };
 }
